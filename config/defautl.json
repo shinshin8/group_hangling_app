@@ -1,0 +1,8 @@
+{
+    "output_log":{
+        "type": "file",
+        "filename": "all-logs"
+    },
+    "categories": "error",
+    "log_file": "all-logs"
+}
