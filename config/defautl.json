@@ -4,5 +4,11 @@
         "filename": "all-logs"
     },
     "categories": "error",
-    "log_file": "all-logs"
+    "log_file": "all-logs",
+    "db_info":{
+        "host": "127.0.0.1",
+        "user": "group_app",
+        "password": "group_app",
+        "database": "group_managing_db"
+    }
 }
