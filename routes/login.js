@@ -30,16 +30,16 @@ router.get(rootPath, async (req, res, next) => {
     const data = {
       content: errorMessage,
     };
-    return res.render(loginPath, data);
+    return res.render('login', data);
   } catch (error) {
     outPutLog.error(error);
-    next(e);
+    next(error);
   }
 });
 
 // ユーザーログインポスト時のハンドリング設定
 const authenticateHandle = {
-  successRedirect: groupListPath,
+  successRedirect: '/',
   failureRedirect: redirectPath,
   failureFlash: true,
 };

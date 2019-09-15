@@ -4,17 +4,11 @@ const config = require('config');
 // ログ出力設定
 const logConfig = log4Js.configure({
     appenders: {
-        output_log:{
-            type: config.output_log.type,
-            filename: config.output_log.filename
-        }
+        system: {type: 'file', filename: 'system.log'}
     },
-    categories:{
-        default:{
-            appenders:[config.log_file],
-            level: config.categories
-        }
+    categories: {
+        default: {appenders:['system'], level: 'debug'}
     }
-})
+});
 
 module.exports.outPutLog = logConfig.getLogger();
