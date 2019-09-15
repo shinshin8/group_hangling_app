@@ -12,11 +12,11 @@ const flash = require('connect-flash');
 const cryptoJs = require('crypto-js');
 const userModel = require('./model/user_model');
 const mySqlSession = require('express-mysql-session')(session);
-const { dbConnection } = require('./utils/db_utils');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const groupListRouter = require('./routes/group_list');
 
 const app = express();
 
@@ -52,6 +52,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/groupingApp', loginRouter);
+app.use('/groupingApp/groupList', groupListRouter);
 
 // ユーザー名入力項目
 const userName = 'user_name';
