@@ -9,24 +9,26 @@ module.exports.getAllGroup = () => {
   return new Promise((resolve, reject) => {
     // 全グループ取得クエリ
     const sql = `SELECT 
-                        group_list.id, 
-                        group_list.group_name, 
-                        group_list.created_at, 
-                        user.user_name, 
-                        user.icon_path 
-                    FROM(
-                            member 
-                        INNER JOIN 
-                            group_list 
-                        ON 
-                            member.group_id = group_list.id
-                        ) 
-                    INNER JOIN 
-                        user 
-                    ON 
-                        member.user_id = user.id 
-                    WHERE 
-                        member.manager_flg = '1'`;
+                    group_list.id, 
+                    group_list.
+                    group_name, 
+                    group_list.group_icon, 
+                    user.user_name, 
+                    group_list.created_at, 
+                    member.manager_flg 
+                FROM(
+                    member 
+                  INNER JOIN 
+                    group_list 
+                  ON 
+                    group_list.id = member.group_id
+                  ) 
+                INNER JOIN 
+                    user 
+                ON 
+                    member.user_id = user.id 
+                WHERE 
+                    manager_flg = '1'`;
     dbConnection.query(sql, (err, result) => {
       if (err) {
         outPutLog.error(`At getAllGroup in group_list_model.js: ${err}`);

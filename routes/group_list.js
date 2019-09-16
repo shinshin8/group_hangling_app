@@ -12,9 +12,8 @@ router.get(rootPath, async (req, res, next) => {
   try {
     // ログインユーザー取得
     const loginUser = req.user;
-    console.log(loginUser);
     // ログインユーザーが存在しない場合はログイン画面へリダイレクト
-    if (loginUser) {
+    if (!loginUser) {
       return res.redirect(redirectPath);
     }
     // グループ取得
@@ -23,11 +22,12 @@ router.get(rootPath, async (req, res, next) => {
       loginUser: loginUser,
       groups: getAllGroups,
     };
+    console.log(data);
     const groupList = 'group_list';
     return res.render(groupList, data);
   } catch (error) {
-    outPutLog.error(err);
-    // dbConnection.end();
+    outPutLog.error(error);
+    dbConnection.end();
     next(error);
   }
 });

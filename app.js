@@ -92,45 +92,13 @@ passport.use(
 );
 
 // ログインユーザーのシリアライズ化
-passport.serializeUser(async (userName, password, done) => {
-  try {
-    // パスワードのハッシュ化
-    const hashingPassword = cryptoJs.SHA256(password).toString();
-    // ユーザーIDの取得
-    const getLoginUserID = await userModel.selectLoginUser(
-      userName,
-      hashingPassword
-    );
-    if (!getLoginUserID.length || getLoginUserID.length > 1) {
-      return done(null);
-    }
-    // ログインユーザー
-    const loginUser = getLoginUserID[0];
+passport.serializeUser((loginUser, done) => {
     return done(null, loginUser);
-  } catch (error) {
-    return done(null, error);
-  }
 });
 
 // ログインユーザーのデシリアライズ化
-passport.deserializeUser(async (userName, password, done) => {
-  try {
-    // パスワードのハッシュ化
-    const hashingPassword = cryptoJs.SHA256(password).toString();
-    // ユーザーIDの取得
-    const getLoginUserID = await userModel.selectLoginUser(
-      userName,
-      hashingPassword
-    );
-    if (!getLoginUserID.length || getLoginUserID.length > 1) {
-      return done(null);
-    }
-    // ログインユーザー
-    const loginUser = getLoginUserID[0];
-    return done(null, loginUser);
-  } catch (error) {
-    return done(null, error);
-  }
+passport.deserializeUser((loginUser, done) => {
+  done(null, loginUser)
 });
 
 // catch 404 and forward to error handler
