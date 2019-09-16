@@ -12,28 +12,28 @@
     <link rel="stylesheet" href="./stylesheets/login.css">
 </head>
 <body>
-    <header>
-        <h1>
+    <header class="header">
+        <h1 class="display-5 jumbotron_title">
             Grouping App
         </h1>
     </header>
-    <div>
+    <div class="container">
         <% if(content !== undefined) {%>
-            <div>
+            <div class="error">
                 <p><%= content %></p>
             </div>
         <% } %>
-        <form action="/groupingApp/login" method="post">
-            <div>
-                <label>ユーザー名</label>
-                <input type="text" name="user_name" maxlength="50">
+        <form action="/groupingApp/login" method="post" class="forms">
+            <div class="login_form">
+                <label>ユーザー名 : </label>
+                <input type="text" name="user_name" maxlength="50" class="input_form">
             </div>
-            <div>
-                <label>パスワード</label>
-                <input type="password" name="password" maxlength="50">
+            <div class="login_form">
+                <label>パスワード : </label>
+                <input type="password" name="password" maxlength="50" class="input_form">
             </div>
-            <div>
-                <input type="submit" value="ログイン">
+            <div class="login_form">
+                <input type="submit" value="ログイン" class="btn btn-success" id="login_btn">
             </div>
         </form>
     </div>
