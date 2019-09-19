@@ -18,9 +18,29 @@ router.get(rootPath, async (req, res, next) => {
     }
     // グループ取得
     const getAllGroups = await groupListModel.getAllGroup();
+    // 各グループのメンバー数取得
+    const getGroupNumber = await groupListModel.countAllGroupMember();
+    // 各グループとメンバー数の結合情報を保持する配列
+    const allGroupInfo = [];
+    if (getAllGroups.length > 0 && getGroupNumber > 0) {
+      // 各グループとメンバー数の結合情報を保持する配列
+      const allGroupInfo = [];
+      for (const group of getAllGroups) {
+        for (member of getGroupNumber) {
+          let obj = {};
+          obj.id = group.id;
+          obj.group_name = group.group_name;
+          obj.group_icon = group.group_icon;
+          obj.user_name = group.user_name;
+          obj.created_at = group.created_at;
+          obj.count_number = member.count_member;
+          allGroupInfo.push(obj);
+        }
+      }
+    }
     const data = {
       loginUser: loginUser,
-      groups: getAllGroups,
+      groups: allGroupInfo,
     };
     console.log(data);
     const groupList = 'group_list';

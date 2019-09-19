@@ -10,8 +10,7 @@ module.exports.getAllGroup = () => {
     // 全グループ取得クエリ
     const sql = `SELECT 
                     group_list.id, 
-                    group_list.
-                    group_name, 
+                    group_list.group_name, 
                     group_list.group_icon, 
                     user.user_name, 
                     group_list.created_at, 
@@ -37,6 +36,26 @@ module.exports.getAllGroup = () => {
       }
       resolve(result);
       return;
+    });
+  });
+};
+
+/**
+ * 各グループのメンバー数取得
+ * @returns {Object} プロミスオブジェクト
+ */
+module.exports.countAllGroupMember = () => {
+  return new Promise((resolve, reject) => {
+    // 実行クエリ
+    const sql = `SELECT group_id, COUNT(id) AS count_member FROM member GROUP BY group_id`;
+    dbConnection.query(sql, (err, result) => {
+      if (err) {
+        outPutLog.error(`At countAllGroupMember in group_list_model.js: ${err}`);
+        reject(err);
+        return;
+      }
+      resolve(result);
+      return
     });
   });
 };
