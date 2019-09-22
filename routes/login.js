@@ -2,13 +2,12 @@ const express = require('express');
 const router = express();
 const { outPutLog } = require('../utils/log_utils');
 const passport = require('passport');
-const moment = require('moment');
 // ルートパス
 const rootPath = '/';
 // ログインパス
 const loginPath = '/login';
 // グループ一覧パス
-const groupListPath = '/groupingApp/groupList';
+const newerGroupListPath = '/groupingApp/newerGroupList';
 // リダイレクト先パス
 const redirectPath = '/groupingApp';
 
@@ -39,7 +38,7 @@ router.get(rootPath, async (req, res, next) => {
 
 // ユーザーログインポスト時のハンドリング設定
 const authenticateHandle = {
-  successRedirect: '/',
+  successRedirect: newerGroupListPath,
   failureRedirect: redirectPath,
   failureFlash: true,
 };

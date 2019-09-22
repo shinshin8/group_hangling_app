@@ -12,11 +12,11 @@ const flash = require('connect-flash');
 const cryptoJs = require('crypto-js');
 const userModel = require('./model/user_model');
 const mySqlSession = require('express-mysql-session')(session);
-const { dbConnection } = require('./utils/db_utils');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const newerGroupListRouter = require('./routes/group_list_newer');
 
 const app = express();
 
@@ -52,6 +52,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/groupingApp', loginRouter);
+app.use('/groupingApp/newerGroupList', newerGroupListRouter);
 
 // ユーザー名入力項目
 const userName = 'user_name';
@@ -91,45 +92,13 @@ passport.use(
 );
 
 // ログインユーザーのシリアライズ化
-passport.serializeUser(async (userName, password, done) => {
-  try {
-    // パスワードのハッシュ化
-    const hashingPassword = cryptoJs.SHA256(password).toString();
-    // ユーザーIDの取得
-    const getLoginUserID = await userModel.selectLoginUser(
-      userName,
-      hashingPassword
-    );
-    if (!getLoginUserID.length || getLoginUserID.length > 1) {
-      return done(null);
-    }
-    // ログインユーザー
-    const loginUser = getLoginUserID[0];
+passport.serializeUser((loginUser, done) => {
     return done(null, loginUser);
-  } catch (error) {
-    return done(null, error);
-  }
 });
 
 // ログインユーザーのデシリアライズ化
-passport.deserializeUser(async (userName, password, done) => {
-  try {
-    // パスワードのハッシュ化
-    const hashingPassword = cryptoJs.SHA256(password).toString();
-    // ユーザーIDの取得
-    const getLoginUserID = await userModel.selectLoginUser(
-      userName,
-      hashingPassword
-    );
-    if (!getLoginUserID.length || getLoginUserID.length > 1) {
-      return done(null);
-    }
-    // ログインユーザー
-    const loginUser = getLoginUserID[0];
-    return done(null, loginUser);
-  } catch (error) {
-    return done(null, error);
-  }
+passport.deserializeUser((loginUser, done) => {
+  done(null, loginUser)
 });
 
 // catch 404 and forward to error handler

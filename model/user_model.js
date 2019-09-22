@@ -15,6 +15,7 @@ module.exports.selectLoginUser = (userName, hashedPassword) => {
                       user_name,
                       password,
                       mail_address,
+                      icon_path,
                       autority_flg
                   FROM 
                       user 
