@@ -17,6 +17,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const newerGroupListRouter = require('./routes/group_list_newer');
+const logoutRouter = require('./routes/logout');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/groupingApp', loginRouter);
 app.use('/groupingApp/newerGroupList', newerGroupListRouter);
+app.use('/groupingApp/logout', logoutRouter);
 
 // ユーザー名入力項目
 const userName = 'user_name';
@@ -93,12 +95,12 @@ passport.use(
 
 // ログインユーザーのシリアライズ化
 passport.serializeUser((loginUser, done) => {
-    return done(null, loginUser);
+  return done(null, loginUser);
 });
 
 // ログインユーザーのデシリアライズ化
 passport.deserializeUser((loginUser, done) => {
-  done(null, loginUser)
+  done(null, loginUser);
 });
 
 // catch 404 and forward to error handler
