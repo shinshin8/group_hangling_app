@@ -18,6 +18,7 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const newerGroupListRouter = require('./routes/group_list_newer');
 const logoutRouter = require('./routes/logout');
+const popularGroupListRouter = require('./routes/popular_group_list');
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use('/users', usersRouter);
 app.use('/groupingApp', loginRouter);
 app.use('/groupingApp/newerGroupList', newerGroupListRouter);
 app.use('/groupingApp/logout', logoutRouter);
+app.use('/groupingApp/popularGroupList', popularGroupListRouter);
 
 // ユーザー名入力項目
 const userName = 'user_name';
