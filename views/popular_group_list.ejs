@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./stylesheets/group_list_newer.css">
+        <title>Grouping App</title>
+</head>
+<body>
+        <div class="jumbotron">
+            <div class="flex_container">
+                <div>
+                    <h3 class="jumbotron_title">Grouping App</h3>
+                </div>
+                <div class="name_list">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                            <% if(loginUser.icon_path == "") {%>
+                                <img src="./images/user.png" alt="Icon" class="rounded-circle">
+                            <% }else{ %>
+                                <img src="<%= loginUser.icon_path %>" alt="User Icon" class="rounded-circle">
+                            <% } %>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">ようこそ、<%= loginUser.user_name %>さん</a>
+                            <a class="dropdown-item" href="/groupingApp/profile?id=<%= loginUser.id %>">プロファイル</a>
+                            <a href="/groupingApp/managingGroup" class="dropdown-item">グループ管理</a>
+                            <a class="dropdown-item" href="/groupingApp/logout">ログアウト</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <head>
+            <h1 class="title">新着グループ一覧</h1>
+        </head>
+        <div class="container btn_list">
+                <div class="new_group_btn">
+                    <a href="/groupingApp/newerGroupList" class="btn btn-secondary" role="button">新着順</a>
+                </div>
+                <div>
+                    <a href="/groupingApp/popularGroupList" class="btn btn-secondary" role="button">人気順</a>
+                </div>
+        </div>
+        <div class="container">
+            <% for(const info of groups) { %>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= info.group_name%></h5>
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <% if(info.icon == "") {%>
+                                    <img src="./images/user.png" alt="Icon" class="rounded-circle">
+                                <% }else{ %>
+                                    <img src="<%= info.icon %>" alt="User Icon" class="rounded-circle">
+                                <% } %>
+                            </div>
+                            <div class="p-2">
+                                <p class="author_name">by <%= info.user_name %></p>
+                            </div>
+                            <div class="ml-auto p-2">
+                                <p><%= info.count_number%> member</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </body>
+    </html>
