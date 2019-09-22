@@ -11,8 +11,8 @@ module.exports.getAllGroup = () => {
     const sql = `SELECT 
                     group_list.id, 
                     group_list.group_name, 
-                    group_list.group_icon, 
                     user.user_name, 
+                    user.icon_path,
                     group_list.created_at, 
                     member.manager_flg 
                 FROM(

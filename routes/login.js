@@ -7,7 +7,7 @@ const rootPath = '/';
 // ログインパス
 const loginPath = '/login';
 // グループ一覧パス
-const groupListPath = '/groupingApp/groupList';
+const newerGroupListPath = '/groupingApp/newerGroupList';
 // リダイレクト先パス
 const redirectPath = '/groupingApp';
 
@@ -38,7 +38,7 @@ router.get(rootPath, async (req, res, next) => {
 
 // ユーザーログインポスト時のハンドリング設定
 const authenticateHandle = {
-  successRedirect: groupListPath,
+  successRedirect: newerGroupListPath,
   failureRedirect: redirectPath,
   failureFlash: true,
 };

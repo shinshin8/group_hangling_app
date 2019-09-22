@@ -20,31 +20,36 @@ router.get(rootPath, async (req, res, next) => {
     const getAllGroups = await groupListModel.getAllGroup();
     // 各グループのメンバー数取得
     const getGroupNumber = await groupListModel.countAllGroupMember();
-    // 各グループとメンバー数の結合情報を保持する配列
-    const allGroupInfo = [];
-    if (getAllGroups.length > 0 && getGroupNumber > 0) {
+    // 新着順のグループ情報を保持する配列
+    let newerGroupList = [];
+    if (getAllGroups.length > 0 && getGroupNumber.length > 0) {
       // 各グループとメンバー数の結合情報を保持する配列
       const allGroupInfo = [];
       for (const group of getAllGroups) {
         for (member of getGroupNumber) {
-          let obj = {};
-          obj.id = group.id;
-          obj.group_name = group.group_name;
-          obj.group_icon = group.group_icon;
-          obj.user_name = group.user_name;
-          obj.created_at = group.created_at;
-          obj.count_number = member.count_member;
-          allGroupInfo.push(obj);
+          if (group.id === member.group_id) {
+            let obj = {};
+            obj.id = group.id;
+            obj.group_name = group.group_name;
+            obj.icon = group.icon_path;
+            obj.user_name = group.user_name;
+            obj.created_at = group.created_at;
+            obj.count_number = member.count_member;
+            allGroupInfo.push(obj);
+          }
         }
       }
+      // グループを新着順に並び替える。
+      newerGroupList = allGroupInfo.sort((a, b) =>
+        a.created_at < b.created_at ? 1 : -1
+      );
     }
     const data = {
       loginUser: loginUser,
-      groups: allGroupInfo,
+      groups: newerGroupList,
     };
-    console.log(data);
-    const groupList = 'group_list';
-    return res.render(groupList, data);
+    const groupListNewer = 'group_list_newer';
+    return res.render(groupListNewer, data);
   } catch (error) {
     outPutLog.error(error);
     dbConnection.end();
