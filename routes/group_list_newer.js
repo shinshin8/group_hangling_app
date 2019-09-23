@@ -44,6 +44,7 @@ router.get(rootPath, async (req, res, next) => {
         a.created_at < b.created_at ? 1 : -1
       );
     }
+    console.log(loginUser);
     const data = {
       loginUser: loginUser,
       groups: newerGroupList,
