@@ -19,6 +19,7 @@ const loginRouter = require('./routes/login');
 const newerGroupListRouter = require('./routes/group_list_newer');
 const logoutRouter = require('./routes/logout');
 const popularGroupListRouter = require('./routes/popular_group_list');
+const userProfileRouter = require('./routes/user_profile');
 
 const app = express();
 
@@ -49,7 +50,6 @@ app.use(flash());
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(validator());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -57,6 +57,8 @@ app.use('/groupingApp', loginRouter);
 app.use('/groupingApp/newerGroupList', newerGroupListRouter);
 app.use('/groupingApp/logout', logoutRouter);
 app.use('/groupingApp/popularGroupList', popularGroupListRouter);
+app.use('/groupingApp/profile', userProfileRouter);
+
 
 // ユーザー名入力項目
 const userName = 'user_name';
