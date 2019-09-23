@@ -50,7 +50,6 @@ app.use(flash());
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(validator());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

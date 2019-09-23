@@ -39,6 +39,11 @@
     <head>
         <h1 class="title">プロフィール</h1>
     </head>
+    <div class="error">
+        <p class="error_msg">
+            <%- errorMessage %>
+        </p>
+        </div>
     <div class="container">
         <div>
             <div>
@@ -55,45 +60,45 @@
         </div>
         <div class="user-form">
             <form action="/groupingApp/profile" method="post">
-                <div class="required-form" hidden>
+                <!-- <div class="required-form" hidden>
                     <input type="text" name="login-user-id" value="<%= loginUser.id%>">
-                </div>
+                </div> -->
                 <table class="table required-form">
                     <tbody>
                         <tr>
                             <th>ユーザー名</th>
                             <td>
-                                <input type="text" name="user_name" class="input-form" maxlength="20" value="<%= loginUser.user_name %>">
+                                <input type="text" name="user_name" class="input-form" maxlength="20" value="<%= userName %>">
                             </td>
                         </tr>
                         <tr>
                             <th>メールアドレス</th>
                             <td>
-                                <input type="text" name="mail_address" class="input-form" maxlength="100" value="<%= loginUser.mail_address %>">
+                                <input type="text" name="mail_address" class="input-form" maxlength="100" value="<%= mailAddress %>">
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-success" id="update-btn" data-toggle="modal" data-target="confirm-modal">更新</button>
-                <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="confirm-label" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="confirm-modal">プロフィール更新</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn btn-success" id="update-btn" data-toggle="modal" data-target="#updateProfileModal">更新</button>
+                <div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog" aria-labelledby="updateProfileModalLabel"aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="updateProfileModalLabel">更新</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                プロフィールを更新しますか？
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                                <button name="update" value="update" id="update-profile-confirm-btn" class="btn btn-success">OK</button>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    プロフィールを更新しますか？
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                    <button name="type" value="update" id="renew_submission" class="btn btn-success">OK</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     </div>

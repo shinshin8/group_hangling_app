@@ -50,12 +50,14 @@ module.exports.countAllGroupMember = () => {
     const sql = `SELECT group_id, COUNT(id) AS count_member FROM member GROUP BY group_id`;
     dbConnection.query(sql, (err, result) => {
       if (err) {
-        outPutLog.error(`At countAllGroupMember in group_list_model.js: ${err}`);
+        outPutLog.error(
+          `At countAllGroupMember in group_list_model.js: ${err}`
+        );
         reject(err);
         return;
       }
       resolve(result);
-      return
+      return;
     });
   });
 };
