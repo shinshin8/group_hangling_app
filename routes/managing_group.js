@@ -23,8 +23,8 @@ router.get(rootPath, async (req, res, next) => {
     // 所属グループ情報を保持する配列
     let belongGroup = [];
     // グループが存在しない場合のメッセージを保持する変数
-    let message = '所属しているグループが存在しません。'
-    if(memberGroup.length > 0 && countMember.length > 0){
+    let message = '所属しているグループが存在しません。';
+    if (memberGroup.length > 0 && countMember.length > 0) {
       message = '';
       // 各グループとメンバー数の結合情報を保持する配列
       const allGroupInfo = [];
@@ -47,7 +47,6 @@ router.get(rootPath, async (req, res, next) => {
         a.created_at < b.created_at ? 1 : -1
       );
     }
-    // console.log(belongGroup);
     const data = {
       loginUser: loginUser,
       message: message,
