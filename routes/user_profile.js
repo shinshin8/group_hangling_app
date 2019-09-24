@@ -94,7 +94,7 @@ router.post(rootPath, profileCheck, async (req, res, next) => {
         mailAddress: mailAddress,
       };
       const userProfile = 'user_profile';
-      return res.render(userProfile, data)
+      return res.render(userProfile, data);
     }
   } catch (error) {
     outPutLog.error(error);
