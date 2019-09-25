@@ -22,6 +22,7 @@ const popularGroupListRouter = require('./routes/popular_group_list');
 const userProfileRouter = require('./routes/user_profile');
 const managingGroupRouter = require('./routes/managing_group');
 const managingGroupOrganizerRouter = require('./routes/managing_group_organizer');
+const createGroupRouter = require('./routes/create_group');
 
 const app = express();
 
@@ -62,6 +63,7 @@ app.use('/groupingApp/popularGroupList', popularGroupListRouter);
 app.use('/groupingApp/profile', userProfileRouter);
 app.use('/groupingApp/managingGroup', managingGroupRouter);
 app.use('/groupingApp/managingGroup/organize', managingGroupOrganizerRouter);
+app.use('/groupingApp/createGroup', createGroupRouter);
 
 // ユーザー名入力項目
 const userName = 'user_name';

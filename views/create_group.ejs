@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/create_group.css">
+    <title>Grouping App</title>
+</head>
+<body>
+    <div class="jumbotron">
+            <div class="flex-container">
+                <div>
+                    <h3 class="jumbotron-title">Grouping App</h3>
+                </div>
+                <div class="name-list">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                            <% if(loginUser.icon_path == "") {%>
+                                <img src="./images/user.png" alt="Icon" class="rounded-circle">
+                            <% }else{ %>
+                                <img src="<%= loginUser.icon_path %>" alt="User Icon" class="rounded-circle">
+                            <% } %>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">ようこそ、<%= loginUser.user_name %>さん</a>
+                            <a class="dropdown-item" href="/groupingApp/profile">プロファイル</a>
+                            <a href="/groupingApp/managingGroup" class="dropdown-item">グループ管理</a>
+                            <a class="dropdown-item" href="/groupingApp/logout">ログアウト</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <head>
+        <h1 class="title">グループ作成</h1>
+    </head>
+    <div class="error">
+        <p class="error_msg">
+            <%- errorMessage %>
+        </p>
+    </div>
+    <div class="container">
+        <div class="create-form">
+            <form action="/groupingApp/createGroup" method="post">
+                <table class="table required-form">
+                    <tbody>
+                        <tr>
+                            <th>グループ名</th>
+                            <td>
+                                <input type="text" name="group_name" class="input-form" maxlength="20" value="<%= groupName %>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>概要</th>
+                            <td>
+                                <textarea name="overview" cols="30" rows="10" id="text"><%= overview %></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createGroupModal" id="register_btn">
+                    登録
+                </button>
+                <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="createGroupModalLabel"aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createGroupModalLabel">グループ作成</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                グループを作成しますか？
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                <button name="type" value="register" id="renew_submission" class="btn btn-success">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

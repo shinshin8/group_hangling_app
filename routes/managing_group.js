@@ -5,6 +5,8 @@ const { dbConnection } = require('../utils/db_utils');
 const groupListModel = require('../model/group_list_model');
 // ルートパス
 const rootPath = '/';
+// リダイレクト先パス
+const redirectPath = '/groupingApp';
 
 router.get(rootPath, async (req, res, next) => {
   try {
