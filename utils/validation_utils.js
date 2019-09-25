@@ -20,3 +20,17 @@ module.exports.profileCheck = [
     .isLength({ max: 100 })
     .withMessage('メールアドレスは100文字以内で入力してください。'),
 ];
+
+// グループバリデーション
+module.exports.groupCheck = [
+  check('group_name')
+    .not()
+    .isEmpty()
+    .withMessage('グループ名は必ず入力してください。'),
+  check('group_name')
+    .isLength({ max: 50 })
+    .withMessage('ユーザー名は50文字以内で入力してください。'),
+  check('overview')
+    .isLength({ max: 500 })
+    .withMessage('概要は500文字以内で入力してください。'),
+];

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+.jumbotron_title{
+    font-family: 'Inconsolata', monospace;
+}
+
+.flex_container{
+    display: flex;
+    justify-content: space-between
+}
+
+.jumbotron{
+    padding: 10px;
+}
+
+.header{
+    text-align: center;
+    margin: 120px 0px 60px 0px;
+}
+
+.input_form {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.title{
+    text-align: center;
+    margin-bottom: 70px;
+    font-size: 30px;
+}
+
+img{
+    height: 30px;
+    width: 30px;
+}
+
+.btn_list{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 10px 30px 10px;
+    margin-top: -60px;
+}
+
+.card{
+    margin: 10px 20% 10px 20%;
+    border-radius: 15px;
+}
+
+.card-body{
+    margin-left: 10px;
+}
+
+.author_name{
+    margin-left: 10px
+}
+
+.card-title{
+    margin-left: 15px;
+}
+
+.new_group_btn{
+    margin-right: 10px;
+}
+
+.message{
+    margin-top: 50px;
+    text-align: center;
+}

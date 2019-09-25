@@ -2,9 +2,9 @@ const express = require('express');
 const router = express();
 const { outPutLog } = require('../utils/log_utils');
 const { dbConnection } = require('../utils/db_utils');
-const userModel = require('../model/user_model');
+const groupModel = require('../model/group_list_model');
 const { validationResult } = require('express-validator');
-const { profileCheck } = require('../utils/validation_utils');
+const { groupCheck } = require('../utils/validation_utils');
 // ルートパス
 const rootPath = '/';
 // リダイレクト先パス
@@ -21,11 +21,11 @@ router.get(rootPath, async (req, res, next) => {
     const data = {
       errorMessage: '',
       loginUser: loginUser,
-      userName: loginUser.user_name,
-      mailAddress: loginUser.mail_address,
+      groupName: '',
+      overview: '',
     };
-    const userProfile = 'user_profile';
-    return res.render(userProfile, data);
+    const createGroup = 'create_group';
+    return res.render(createGroup, data);
   } catch (error) {
     outPutLog.error(error);
     dbConnection.end();
@@ -33,7 +33,7 @@ router.get(rootPath, async (req, res, next) => {
   }
 });
 
-router.post(rootPath, profileCheck, async (req, res, next) => {
+router.post(rootPath, groupCheck, async (req, res, next) => {
   try {
     // ログインユーザー取得
     const loginUser = req.user;
@@ -43,12 +43,12 @@ router.post(rootPath, profileCheck, async (req, res, next) => {
     }
     // ユーザーID
     const userID = loginUser.id;
-    // ユーザー名
-    const userName = req.body.user_name;
-    // メールアドレス
-    const mailAddress = req.body.mail_address;
-    // モーダルの更新ボタン
-    const updateProfile = req.body.type;
+    // グループ名
+    const groupName = req.body.group_name;
+    // 概要
+    const overview = req.body.overview;
+    // モーダルの登録ボタン
+    const create = req.body.type;
     const error = validationResult(req);
     if (!error.isEmpty()) {
       // エラーメッセージを保持する変数
@@ -61,40 +61,33 @@ router.post(rootPath, profileCheck, async (req, res, next) => {
       const data = {
         errorMessage: errorMsg,
         loginUser: loginUser,
-        userName: userName,
-        mailAddress: mailAddress,
+        groupName: groupName,
+        overview: overview,
       };
-      const userProfile = 'user_profile';
-      return res.render(userProfile, data);
+      const createGroup = 'create_group';
+      return res.render(createGroup, data);
     }
-    if (updateProfile == 'update') {
-      // パスワード
-      const password = loginUser.password;
-      // DBを検索し、ユーザー名とパスワードのペアがユニークであるかを判定する。
-      const isUniqueUser = await userModel.isUniqueUser(userName, password);
-      if (isUniqueUser >= 1) {
-        // エラーメッセージ
-        const errorMessage =
-          'すでに存在しているユーザー名です。<br>他のユーザー名を設定してください。';
+    if (create === 'register') {
+      // グループの新規作成
+      const createNewGroup = await groupModel.createGroup(groupName, overview, userID);
+      if(!createNewGroup){
         const data = {
-          errorMessage: errorMessage,
-          loginUser: loginUser,
-          userName: userName,
-          mailAddress: mailAddress,
-        };
-        const userProfile = 'user_profile';
-        return res.render(userProfile, data);
+            errorMessage: 'グループの新規登録に失敗しました。',
+            loginUser: loginUser,
+            groupName: groupName,
+            overview: overview,
+          };
+          const createGroup = 'create_group';
+          return res.render(createGroup, data);
       }
-      // ユーザー情報の更新
-      await userModel.updateUser(userName, mailAddress, userID);
       const data = {
         errorMessage: '',
         loginUser: loginUser,
-        userName: userName,
-        mailAddress: mailAddress,
+        groupName: groupName,
+        overview: overview,
       };
-      const userProfile = 'user_profile';
-      return res.render(userProfile, data);
+      const createGroup = 'create_group';
+      return res.render(createGroup, data);
     }
   } catch (error) {
     outPutLog.error(error);
