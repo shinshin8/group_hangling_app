@@ -69,16 +69,20 @@ router.post(rootPath, groupCheck, async (req, res, next) => {
     }
     if (create === 'register') {
       // グループの新規作成
-      const createNewGroup = await groupModel.createGroup(groupName, overview, userID);
-      if(!createNewGroup){
+      const createNewGroup = await groupModel.createGroup(
+        groupName,
+        overview,
+        userID
+      );
+      if (!createNewGroup) {
         const data = {
-            errorMessage: 'グループの新規登録に失敗しました。',
-            loginUser: loginUser,
-            groupName: groupName,
-            overview: overview,
-          };
-          const createGroup = 'create_group';
-          return res.render(createGroup, data);
+          errorMessage: 'グループの新規登録に失敗しました。',
+          loginUser: loginUser,
+          groupName: groupName,
+          overview: overview,
+        };
+        const createGroup = 'create_group';
+        return res.render(createGroup, data);
       }
       const data = {
         errorMessage: '',

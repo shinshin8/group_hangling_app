@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+.jumbotron-title{
+    font-family: 'Inconsolata', monospace;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: space-between
+}
+
+.jumbotron{
+    padding: 10px;
+}
+
+.title{
+    text-align: center;
+    margin-bottom: 70px;
+    font-size: 30px;
+}
+
+.container{
+    display: flex;
+    justify-content: space-evenly
+}
+
+.header{
+    text-align: center;
+    margin: 100px 0px
+}
+
+#login-btn{
+    margin-top: 50px;
+    margin-left: 35%;
+}
