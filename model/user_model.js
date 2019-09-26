@@ -101,3 +101,52 @@ module.exports.updateUser = (userName, mailAddress, userID) => {
     });
   });
 };
+
+/**
+ * ユーザー新規登録
+ * @param {String} userName ユーザー名
+ * @param {String} password パスワード
+ * @param {String} mailAddress メールアドレス
+ * @returns {Object} プロミスオブジェクト
+ */
+module.exports.registerUser = (userName, password, mailAddress) => {
+  return new Promise((resolve, reject) => {
+    // 実行クエリ
+    const sql = `INSERT INTO user(user_name, password, mail_address, autority_flg) VALUES(?, ?, ?, '0')`;
+    dbConnection.query(
+      sql,
+      [userName, password, mailAddress],
+      (err, result) => {
+        if (err) {
+          outPutLog.error(`At registerUser in user_model.js: ${err}`);
+          reject(err);
+          return;
+        }
+        resolve(result);
+        return;
+      }
+    );
+  });
+};
+
+/**
+ * 既に存在するユーザーかの判定
+ * @param {String} userName ユーザー名
+ * @param {String} password パスワード
+ * @returns {Object} プロミスオブジェクト 
+ */
+module.exports.isExistUser = (userName, password) =>{
+  return new Promise((resolve, reject) =>{
+    // 実行クエリ
+    const sql = `SELECT id FROM user WHERE user_name = ? AND password = ?`;
+    dbConnection.query(sql, [userName, password], (err, result)=>{
+      if (err) {
+        outPutLog.error(`At isExistUser in user_model.js: ${err}`);
+        reject(err);
+        return;
+      }
+      resolve(result);
+      return;
+    });
+  });
+};

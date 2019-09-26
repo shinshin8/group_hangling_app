@@ -34,3 +34,28 @@ module.exports.groupCheck = [
     .isLength({ max: 500 })
     .withMessage('概要は500文字以内で入力してください。'),
 ];
+
+// 新規ユーザー登録バリデーション
+module.exports.createNewUserCheck = [
+  check('user_name')
+    .not()
+    .isEmpty()
+    .withMessage('ユーザー名は必ず入力してください。'),
+  check('user_name')
+    .isLength({ max: 20 })
+    .withMessage('ユーザー名は50文字以内で入力してください。'),
+    check('mail_address')
+    .not()
+    .isEmpty()
+    .withMessage('メールアドレスは必ず入力してください。'),
+  check('mail_address')
+    .isEmail()
+    .withMessage('不正なメールアドレスです。'),
+  check('password')
+    .not()
+    .isEmpty()
+    .withMessage('パスワードは必ず入力してください。'),
+  check('password')
+    .isLength({ max: 20 })
+    .withMessage('パスワードは20文字以内で入力してください。'),
+];

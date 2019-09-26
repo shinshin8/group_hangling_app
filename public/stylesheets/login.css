@@ -37,9 +37,15 @@ body {
 }
 
 #login_btn{
+    margin-top: 10px;
     margin-left: 10px
 }
 
 .password{
     margin-left: 30px;
+}
+
+#register-user{
+    margin-top: 50px;
+    margin-left: 45%;
 }

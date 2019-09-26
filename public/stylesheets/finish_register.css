@@ -29,45 +29,9 @@
     margin: 100px 0px
 }
 
-.input-form {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 300px;
-}
-
-.user-form{
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-}
-
-img{
-    height: 30px;
-    width: 30px;
-}
-
-#update-btn{
-    margin-top: 30px;
-    margin-left: 40%;
-}
-
-.required-form{
-    font-size: 20px;
-}
-
-.error{
-    text-align: center;
-    color: red;
-    margin-bottom: 30px;
-}
-
-#text{
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#register_btn{
-    margin-left: 50%;
+#login-btn{
+    margin-top: 50px;
+    margin-left: 35%;
 }
 
 #app-title{

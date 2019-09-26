@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const config = require('config');
-const validator = require('express-validator');
 const { Strategy } = require('passport-local');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -23,6 +22,8 @@ const userProfileRouter = require('./routes/user_profile');
 const managingGroupRouter = require('./routes/managing_group');
 const managingGroupOrganizerRouter = require('./routes/managing_group_organizer');
 const createGroupRouter = require('./routes/create_group');
+const createNewUserRouter = require('./routes/create_new_user');
+const finishRegisterRouter = require('./routes/finish_register');
 
 const app = express();
 
@@ -64,6 +65,8 @@ app.use('/groupingApp/profile', userProfileRouter);
 app.use('/groupingApp/managingGroup', managingGroupRouter);
 app.use('/groupingApp/managingGroup/organize', managingGroupOrganizerRouter);
 app.use('/groupingApp/createGroup', createGroupRouter);
+app.use('/groupingApp/createUser', createNewUserRouter);
+app.use('/groupingApp/finishCreate', finishRegisterRouter);
 
 // ユーザー名入力項目
 const userName = 'user_name';
