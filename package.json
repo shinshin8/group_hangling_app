@@ -1,9 +1,15 @@
 {
   "name": "group-hangling-app",
-  "version": "0.0.0",
+  "description": "Group Managing App",
+  "main": "app.js",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
+  },
+  "directories": {
+    "doc": "docs",
+    "bin": "bin"
   },
   "dependencies": {
     "config": "^3.2.2",
