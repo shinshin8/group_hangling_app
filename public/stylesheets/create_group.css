@@ -69,3 +69,8 @@ img{
 #register_btn{
     margin-left: 50%;
 }
+
+#app-title{
+    text-decoration: none;
+    color: black;
+}

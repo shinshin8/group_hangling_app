@@ -65,3 +65,8 @@ img{
     height: 100px;
     width: 100px;
 }
+
+#app-title{
+    text-decoration: none;
+    color: black;
+}
