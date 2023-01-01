@@ -12,7 +12,7 @@
     "bin": "bin"
   },
   "dependencies": {
-    "config": "^3.2.2",
+    "config": "^3.3.8",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "crypto-js": "^3.1.9-1",
